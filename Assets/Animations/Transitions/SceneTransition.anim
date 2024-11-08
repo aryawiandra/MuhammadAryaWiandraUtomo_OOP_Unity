@@ -1,0 +1,4 @@
+
+// Create two animations in Unity's Animation window:
+// 1. StartTransition: scale from 0 to 20
+// 2. EndTransition: scale from 20 to 0
