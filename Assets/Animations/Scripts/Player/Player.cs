@@ -34,10 +34,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Call method Move dari PlayerMovement
+        // Call method Move dan MoveBound dari PlayerMovement
         if (playerMovement != null)
         {
             playerMovement.Move();
+            playerMovement.MoveBound();
         }
     }
 
