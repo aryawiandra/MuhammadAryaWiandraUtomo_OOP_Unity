@@ -1,31 +1,40 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public Animator sceneTransitionAnimator;
+    public LevelManager LevelManager { get; private set; }
 
-    private void Awake()
+
+
+    void Awake()
     {
-        if (Instance == null)
+        foreach (Transform child in transform)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (child.GetComponent<Canvas>() != null || child.GetComponent<UnityEngine.UI.Image>() != null)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
-        else
+        if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+
+        LevelManager = GetComponentInChildren<LevelManager>();
+
+        DontDestroyOnLoad(gameObject);
+        var camera = GameObject.Find("Camera");
+        if (camera != null)
+        {
+            DontDestroyOnLoad(camera);
         }
     }
 
-    public void StartTransition()
-    {
-        sceneTransitionAnimator.SetTrigger("StartTransition");
-    }
 
-    public void EndTransition()
-    {
-        sceneTransitionAnimator.SetTrigger("EndTransition");
-    }
 }

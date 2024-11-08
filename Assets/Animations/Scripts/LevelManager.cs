@@ -1,30 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
-    private GameManager gameManager;
+    [SerializeField] private Animator animator;
 
-    private void Awake()
+    void Awake()
     {
-        gameManager = GameManager.Instance;
+        animator.enabled = false;
     }
 
-    public void LoadSceneAsync(string sceneName)
+    public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneAsyncCoroutine(sceneName));
+        StartCoroutine(LoadSceneAsync(sceneName));
     }
 
-    private IEnumerator LoadSceneAsyncCoroutine(string sceneName)
+    private IEnumerator LoadSceneAsync(string sceneName)
     {
-        gameManager.StartTransition();
-        yield return new WaitForSeconds(1f); // Adjust the wait time to match the transition duration
+        animator.enabled = true;
+        // Play animation if needed
+        if (animator != null)
+        {
+            //animator.SetTrigger("Start");
+        }
+
+        // Wait for the animation to finish
+        yield return new WaitForSeconds(1f); // Adjust the wait time to match the animation duration
+
+        // Load the scene asynchronously
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        animator.SetTrigger("Finished");
+
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
-        gameManager.EndTransition();
+
     }
 }
