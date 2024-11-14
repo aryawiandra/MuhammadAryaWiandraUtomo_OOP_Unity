@@ -1,58 +1,99 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
-    [SerializeField] private GameObject weaponPrefab;
-    
-    // Buat mount offset bisa diedit di inspector dengan label yang jelas
-    [Header("Mounting Configuration")]
-    [Tooltip("X: Kiri/Kanan, Y: Atas/Bawah")]
-    [SerializeField] private Vector2 mountOffset = Vector2.zero;
-    
-    // Tambahkan opsi rotasi jika diperlukan
-    [Tooltip("Rotasi weapon dalam derajat")]
-    [SerializeField] private float mountRotation = 0f;
-    
-    // Tambahkan opsi scale
-    [Tooltip("Skala weapon")]
-    [SerializeField] private Vector2 mountScale = Vector2.one;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] private Weapon weaponHolder;
+    private Weapon weapon;
+    void Awake()
     {
-        if (weaponPrefab == null || !other.CompareTag("Player")) return;
-
-        GameObject weaponInstance = Instantiate(weaponPrefab, other.transform.position, Quaternion.identity);
-        
-        if (weaponInstance != null)
+        if (weaponHolder != null)
         {
-            weaponInstance.transform.SetParent(other.transform);
-            
-            // Terapkan semua konfigurasi mounting
-            weaponInstance.transform.localPosition = mountOffset;
-            weaponInstance.transform.localRotation = Quaternion.Euler(0, 0, mountRotation);
-            weaponInstance.transform.localScale = mountScale;
-            
-            Debug.Log($"Weapon mounted at: Position={mountOffset}, Rotation={mountRotation}");
+            weapon = Instantiate(weaponHolder);
         }
-        
-        Destroy(gameObject);
     }
 
-    // Visual helper di editor untuk melihat posisi mounting
-    private void OnDrawGizmosSelected()
+    void Start()
     {
-        // Gambar garis dari pickup ke posisi mounting
-        Gizmos.color = Color.green;
-        Vector3 mountPoint = transform.position + (Vector3)mountOffset;
-        Gizmos.DrawLine(transform.position, mountPoint);
-        Gizmos.DrawWireSphere(mountPoint, 0.1f);
-        
-        // Tampilkan arah rotasi
-        if (mountRotation != 0)
+        if (weapon != null)
         {
-            Gizmos.color = Color.blue;
-            Vector3 direction = Quaternion.Euler(0, 0, mountRotation) * Vector3.right * 0.5f;
-            Gizmos.DrawRay(mountPoint, direction);
+            // Initialize all related methods with false
+            TurnVisual(false);
+            weapon.transform.SetParent(transform, false);
+            weapon.transform.localPosition = transform.position;
+            weapon.parentTransform = transform;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (weapon.transform.parent == transform && other.CompareTag("Player"))
+        {
+            // Get the current weapon and its pickup point
+            Weapon currentWeapon = other.GetComponentInChildren<Weapon>();
+            if (currentWeapon != null)
+            {
+                currentWeapon.transform.SetParent(currentWeapon.parentTransform);
+                currentWeapon.transform.localPosition = Vector3.zero;
+                TurnVisual(false, currentWeapon);
+            }
+
+            // Assign the new weapon to the player
+            weapon.transform.SetParent(other.transform);
+            weapon.transform.localPosition = new Vector3(0, -0.05f, 0);
+            TurnVisual(true);
+
+        }
+    }
+
+    void TurnVisual(bool state)
+    {
+        if (weapon != null)
+        {
+            // Enable or disable all MonoBehaviour components in the Weapon object
+            foreach (var component in weapon.GetComponentsInChildren<MonoBehaviour>())
+            {
+                component.enabled = state;
+            }
+
+            // Enable or disable the Animator component
+            Animator animator = weapon.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                animator.enabled = state;
+            }
+
+            // Enable or disable the renderer components
+            foreach (var renderer in weapon.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = state;
+            }
+        }
+    }
+
+    void TurnVisual(bool state, Weapon weapon)
+    {
+        if (weapon != null)
+        {
+            // Enable or disable all MonoBehaviour components in the Weapon object
+            foreach (var component in weapon.GetComponentsInChildren<MonoBehaviour>())
+            {
+                component.enabled = state;
+            }
+
+            // Enable or disable the Animator component
+            Animator animator = weapon.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                animator.enabled = state;
+            }
+
+            // Enable or disable the renderer components
+            foreach (var renderer in weapon.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = state;
+            }
         }
     }
 }

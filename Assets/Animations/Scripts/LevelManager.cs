@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
 
         // Load the scene asynchronously
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
-        animator.SetTrigger("Finished");
+        animator.SetTrigger("EndTransition");
 
         while (!asyncOperation.isDone)
         {
