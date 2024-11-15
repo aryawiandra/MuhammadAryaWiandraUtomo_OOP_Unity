@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour
         // Check if player has weapon
         if (GameObject.Find("Player").GetComponentInChildren<Weapon>() != null)
         {
-            Debug.Log("Player has weapon, activating portal.");
+            // Debug.Log("Player has weapon, activating portal.");
 
             GetComponent<Collider2D>().enabled = true;
             GetComponent<SpriteRenderer>().enabled = true;
@@ -42,7 +42,7 @@ public class Portal : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player does not have weapon, deactivating portal.");
+            // Debug.Log("Player does not have weapon, deactivating portal.");
 
             GetComponent<Collider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
