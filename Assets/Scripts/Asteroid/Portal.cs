@@ -32,6 +32,7 @@ public class Portal : MonoBehaviour
         }
 
         // Check if player has weapon
+        
         if (GameObject.Find("Player").GetComponentInChildren<Weapon>() != null)
         {
             // Debug.Log("Player has weapon, activating portal.");

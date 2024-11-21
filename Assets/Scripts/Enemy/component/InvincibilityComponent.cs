@@ -22,7 +22,7 @@ public class InvincibilityComponent : MonoBehaviour
 
     public void StartInvincibility()
     {
-        Debug.Log("Invincibility Started");
+        // Debug.Log("Invincibility Started");
         if (!isInvincible)
         {
             StartCoroutine(InvincibilityCoroutine());
@@ -35,10 +35,10 @@ public class InvincibilityComponent : MonoBehaviour
         for (int i = 0; i < blinkingCount; i++)
         {
             spriteRenderer.material = blinkMaterial;
-            Debug.Log("Invincible");
+
             yield return new WaitForSeconds(blinkInterval);
             spriteRenderer.material = originalMaterial;
-            Debug.Log("Vulnerable");
+
             yield return new WaitForSeconds(blinkInterval);
         }
         isInvincible = false;

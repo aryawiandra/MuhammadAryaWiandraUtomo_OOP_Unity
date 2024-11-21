@@ -5,7 +5,7 @@ public class EnemyTargeting : Enemy
     public float speed = 5f;
     private Transform player;
     private Vector3 screenBounds;
-    public int health = 3; // Add health property
+
 
 
     void RandomizeSpawnPoint()
