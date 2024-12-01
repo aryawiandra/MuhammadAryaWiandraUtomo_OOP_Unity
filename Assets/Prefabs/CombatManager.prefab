@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6108581341691014588}
+  - component: {fileID: 3134772371696465236}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -35,6 +36,27 @@ Transform:
   - {fileID: 231996928449174235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3134772371696465236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452710880118033657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4ea0b4e76854f60acb21c5c0e50af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawners:
+  - {fileID: 952049401038236731}
+  - {fileID: 7101554263824608257}
+  - {fileID: 6834219177297438293}
+  - {fileID: 4127667852001451915}
+  timer: 0
+  waveInterval: 5
+  waveNumber: 0
+  totalEnemies: 0
 --- !u!1 &1934572392355442199
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +66,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9026106898721744973}
+  - component: {fileID: 7101554263824608257}
   m_Layer: 0
   m_Name: EnemyHorizontalSpawner
   m_TagString: Untagged
@@ -66,6 +89,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6108581341691014588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7101554263824608257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934572392355442199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e96cb53b4f4a7cb90e24094eb7321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnedEnemy: {fileID: 4920909260629793488, guid: 90715ab1bb910408b81e1a9973b075fb, type: 3}
+  minimumKillsToIncreaseSpawnCount: 6
+  totalKill: 0
+  spawnInterval: 3
+  spawnCount: 6
+  defaultSpawnCount: 6
+  spawnCountMultiplier: 1
+  multiplierIncreaseCount: 1
+  combatManager: {fileID: 3134772371696465236}
+  isSpawning: 0
 --- !u!1 &3917133564151372787
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7044939511976409628}
+  - component: {fileID: 6834219177297438293}
   m_Layer: 0
   m_Name: EnemyVerticalSpawner
   m_TagString: Untagged
@@ -97,6 +143,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6108581341691014588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6834219177297438293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917133564151372787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e96cb53b4f4a7cb90e24094eb7321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnedEnemy: {fileID: 4920909260629793488, guid: f0fb12e0ffd31494bb11eca4f17b4a6a, type: 3}
+  minimumKillsToIncreaseSpawnCount: 6
+  totalKill: 0
+  spawnInterval: 3
+  spawnCount: 6
+  defaultSpawnCount: 6
+  spawnCountMultiplier: 1
+  multiplierIncreaseCount: 1
+  combatManager: {fileID: 3134772371696465236}
+  isSpawning: 0
 --- !u!1 &4999287640831141326
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6759292016484957646}
+  - component: {fileID: 952049401038236731}
   m_Layer: 0
   m_Name: EnemyForwardSpawner
   m_TagString: Untagged
@@ -128,6 +197,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6108581341691014588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952049401038236731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999287640831141326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e96cb53b4f4a7cb90e24094eb7321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnedEnemy: {fileID: 4920909260629793488, guid: f0fb12e0ffd31494bb11eca4f17b4a6a, type: 3}
+  minimumKillsToIncreaseSpawnCount: 6
+  totalKill: 0
+  spawnInterval: 3
+  spawnCount: 6
+  defaultSpawnCount: 6
+  spawnCountMultiplier: 1
+  multiplierIncreaseCount: 1
+  combatManager: {fileID: 3134772371696465236}
+  isSpawning: 0
 --- !u!1 &5107075342904929756
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 231996928449174235}
+  - component: {fileID: 4127667852001451915}
   m_Layer: 0
   m_Name: EnemyBossSpawner
   m_TagString: Untagged
@@ -159,3 +251,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6108581341691014588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4127667852001451915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107075342904929756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e96cb53b4f4a7cb90e24094eb7321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnedEnemy: {fileID: 4920909260629793488, guid: b144a4c47f71941e883619063aba8f9c, type: 3}
+  minimumKillsToIncreaseSpawnCount: 6
+  totalKill: 0
+  spawnInterval: 5
+  spawnCount: 6
+  defaultSpawnCount: 6
+  spawnCountMultiplier: 1
+  multiplierIncreaseCount: 1
+  combatManager: {fileID: 3134772371696465236}
+  isSpawning: 0

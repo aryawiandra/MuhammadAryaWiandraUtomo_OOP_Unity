@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Label tabindex="-1" text="Health: &#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Health" />
+    <ui:Label tabindex="-1" text="Points: " parse-escape-sequences="true" display-tooltip-when-elided="true" name="Points" />
+    <ui:Label tabindex="-1" text="Wave:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" />
+    <ui:Label tabindex="-1" text="Enemies Left:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Enemies" />
+</ui:UXML>
